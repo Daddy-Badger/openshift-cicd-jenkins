@@ -20,17 +20,18 @@ oc create serviceaccount jenkins -n cicd
 ```
 oc policy add-role-to-user edit system:serviceaccount:cicd:jenkins -n cicd-dev
 oc policy add-role-to-user edit system:serviceaccount:cicd:jenkins -n cicd-prod
-oc policy add-role-to-user edit system:serviceaccount:cicd:jenkins -n cicd-staging 
+oc policy add-role-to-user edit system:serviceaccount:cicd:jenkins -n cicd-staging
 ```
 
 - Deploy the OpenShift Pipeline from Git repository
 
 ```
-oc new-app https://github.com/williamcaban/podcicd.git -n cicd
+oc new-app https://github.com/Daddy-Badger/openshift-cicd-jenkins.git -n cicd
 ```
 
 - After about 10 minutes the Jenkins Master should be ready on the `cicd` Project.
 - Start a new pipeline build (either from GUI or CLI)
+
   - From GUI:
 
     `Application Console` > Project `cicd` > Builds > Pipelines --> click the `Start Pipeline` button
@@ -46,6 +47,7 @@ oc new-app https://github.com/williamcaban/podcicd.git -n cicd
 ```
 {"error":"server_error","error_description":"The authorization server encountered an unexpected condition that prevented it from fulfilling the request.","state":"N2UwMTkwNzktYjBmNi00"}
 ```
+
 Execute the following command and retry:
 
 ```
@@ -53,7 +55,8 @@ oc annotate sa jenkins serviceaccounts.openshift.io/oauth-redirectreference.jenk
 ```
 
 # Cleaning the environment
-To clean/uninstall the demo delete the projects 
+
+To clean/uninstall the demo delete the projects
 
 ```
 oc delete project cicd-prod
@@ -76,6 +79,7 @@ pip3 install -r myapp/requirements.txt
 ```
 
 Running local instance
+
 ```
 $ python3 myapp/app.py
 * Serving Flask app "app" (lazy loading)
@@ -88,6 +92,7 @@ $ python3 myapp/app.py
 ```
 
 To run a manual pylint test
+
 ```
 $ pylint app.py
 ************* Module app

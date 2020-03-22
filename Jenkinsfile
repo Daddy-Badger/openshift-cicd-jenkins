@@ -7,10 +7,11 @@ pipeline {
     } //options
 
     environment {
-        APP_NAME    = "podcicd"
+        APP_NAME    = "cicd-jenkinsfile-build"
         GIT_REPO    = "https://github.com/Daddy-Badger/openshift-cicd-jenkins.git"
         GIT_BRANCH  = "master"
         CONTEXT_DIR = "myapp"
+        SOURCE_SECRET = "my-github-access"
 
         CICD_PRJ    = "cicd"
         CICD_DEV    = "${CICD_PRJ}"+"-dev"
@@ -73,11 +74,12 @@ pipeline {
                                     // see exactly what oc command was executed.
                                     echo "Logs executed: ${result.actions[0].cmd}"
                                 } else {
-                                    echo "No proevious BuildConfig. Creating new BuildConfig."
+                                    echo "No previous BuildConfig. Creating new BuildConfig."
                                     def myNewApp = openshift.newApp (
                                         "${GIT_REPO}#${GIT_BRANCH}", 
                                         "--name=${APP_NAME}", 
-                                        "--context-dir=${CONTEXT_DIR}", 
+                                        "--context-dir=${CONTEXT_DIR}",
+                                        "--source-secret=${SOURCE_SECRET}",
                                         "-e BUILD_NUMBER=${BUILD_NUMBER}", 
                                         "-e BUILD_ENV=${openshift.project()}"
                                         )
