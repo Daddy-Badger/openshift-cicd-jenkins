@@ -25,7 +25,7 @@ else:
 @MYAPP.route("/")
 def index():
     """Return container name with build and environment information"""
-    return CONTAINER_NAME + "  (BUILD: " + BUILD_NUMBER + " B.ENV: " + BUILD_ENV +")"
+    return CONTAINER_NAME + "  (BUILD: " + BUILD_NUMBER + " ENVIRONMENT: " + BUILD_ENV +")"
 
 
 @MYAPP.route("/healthz")
