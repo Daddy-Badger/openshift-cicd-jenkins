@@ -65,9 +65,6 @@ pipeline {
                                 if (openshift.selector("bc",APP_NAME).exists()) {
                                     echo "Using existing BuildConfig. Running new Build"
                                     def bc = openshift.startBuild(APP_NAME)
-                                    timeout(5) {
-                                        bc.untilEach(1){return (it.object().status.phase == "Complete")}
-                                    }
                                     openshift.set("env dc/${APP_NAME} BUILD_NUMBER=${BUILD_NUMBER}")
                                     // output build logs to the Jenkins conosole
                                     echo "Logs from build"
