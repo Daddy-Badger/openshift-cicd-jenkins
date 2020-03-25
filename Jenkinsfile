@@ -8,7 +8,7 @@ pipeline {
 
     environment {
         APP_NAME    = "cicd-jenkinsfile-build"
-        GIT_REPO    = "git@github.com:Daddy-Badger/openshift-cicd-jenkins.git"
+        GIT_REPO    = "https://github.com/Daddy-Badger/openshift-cicd-jenkins.git"
         GIT_BRANCH  = "master"
         CONTEXT_DIR = "myapp"
         SOURCE_SECRET = "my-github-access"
