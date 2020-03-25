@@ -80,7 +80,7 @@ pipeline {
                                         "--name=${APP_NAME}", 
                                         "--context-dir=${CONTEXT_DIR}",
                                         "--source-secret=${SOURCE_SECRET}",
-                                        "--strategy=source"
+                                        "--strategy=source",
                                         "-e BUILD_NUMBER=${BUILD_NUMBER}", 
                                         "-e BUILD_ENV=${openshift.project()}"
                                         )
